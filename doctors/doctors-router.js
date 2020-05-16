@@ -20,6 +20,20 @@ router.post('/', async (req, res, next) => {
 	}
 });
 
+router.get('/:id', async (req, res, next) => {
+	try {
+		const doctor = await Doctors.findById(req.params.id);
+		if (!doctor) {
+			return res.status(404).json({
+				message: 'doctor was not found',
+			});
+		}
+		res.json(doctor);
+	} catch (err) {
+		next(err);
+	}
+});
+
 // DELETE doctors
 router.delete('/:id', async (req, res, next) => {
 	try {

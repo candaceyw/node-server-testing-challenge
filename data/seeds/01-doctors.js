@@ -1,4 +1,6 @@
 exports.seed = async function (knex) {
+	await knex('doctors').truncate();
+
 	return knex('doctors').insert([
 		{ name: 'Christopher Eccleston', number: 'Ninth Doctor' },
 		{ name: 'David Tennant', number: 'Tenth Doctor' },

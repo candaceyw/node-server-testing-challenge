@@ -3,12 +3,18 @@ const helmet = require('helmet');
 const doctorsRouter = require('./doctors/doctors-router');
 
 const server = express();
-const port = 5500;
+const port = process.env.PORT || 8100;
 
 server.use(helmet());
 server.use(express.json());
 
 server.use('/doctors', doctorsRouter);
+
+server.get('/', (req, res) => {
+	res.json({
+		message: 'Welcome to our API',
+	});
+});
 
 server.use((err, req, res, next) => {
 	console.log(err);
@@ -17,10 +23,8 @@ server.use((err, req, res, next) => {
 	});
 });
 
-server.get('/', (req, res) => {
-	res.status(200).json('Success');
-});
-
 server.listen(port, () => {
 	console.log(`Running at http://localhost:${port}`);
 });
+
+module.exports = server;

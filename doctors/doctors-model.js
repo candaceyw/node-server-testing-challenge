@@ -4,6 +4,7 @@ module.exports = {
 	get,
 	insert,
 	remove,
+	findById,
 };
 
 function get() {
@@ -15,6 +16,10 @@ function insert(doctor) {
 	return db('doctors')
 		.insert(doctor, 'id')
 		.then(([id]) => get(id));
+}
+
+function findById(id) {
+	return db('doctors').where('id', id).first();
 }
 
 // DELETE project
